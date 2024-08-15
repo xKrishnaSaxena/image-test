@@ -42,7 +42,7 @@ const FileUploadModal = ({ onClose, onUploadFailure }) => {
 
     try {
       const response = await axios.post(
-        `https://893c-2405-201-3023-782e-8de-d464-c051-9c6c.ngrok-free.app/askAboutImages`,
+        `https://e151-2405-201-3023-782e-8de-d464-c051-9c6c.ngrok-free.app//askAboutImages`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
