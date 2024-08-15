@@ -42,7 +42,7 @@ const FileUploadModal = ({ onClose, onUploadFailure }) => {
 
     try {
       const response = await axios.post(
-        `https://e151-2405-201-3023-782e-8de-d464-c051-9c6c.ngrok-free.app/askAboutImages`,
+        `https://de74-2405-201-3023-782e-e043-1489-e169-e632.ngrok-free.app/askAboutImages`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -58,7 +58,7 @@ const FileUploadModal = ({ onClose, onUploadFailure }) => {
       );
       setError(
         error.response?.data?.error ||
-          "Failed to upload and process the file. Please try again."
+          "The file selected is not an image. Please try again."
       );
       handleFailure();
     } finally {

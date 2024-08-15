@@ -63,7 +63,7 @@ app.post("/askAboutImages", upload.single("image"), async (req, res) => {
         {
           role: "system",
           content:
-            "Provide all the relevant information.\nGenerate the invoice in the following format:\n\nWages,tips,other compensation:\nFederal income tax withheld:\nSocial security wages:\nSocial security tax withheld:\nMedicare wages and tips:\nMedicare tax withheld:\nFormat dont have the titles of the categories just output the requested values.",
+            "You are a document processing AI. Your task is to analyze images of W-2 forms and extract specific numerical values. If the image does not contain a W-2 form or if the required information is not present, respond with a clear message indicating that the form is not recognized or the required information cannot be found.\n\nExtract the following numerical values from the W-2 form in the following format:\n\n Wages:\n Federal income tax withheld:\n Social security wages:\n Social security tax withheld:\n Medicare wages and tips:\n Medicare tax withheld:\n\nDo not include titles or labels, only the values.",
         },
         { role: "user", content: [imageContent] },
       ],
@@ -71,7 +71,12 @@ app.post("/askAboutImages", upload.single("image"), async (req, res) => {
     });
 
     const responseData = response.choices[0].message.content;
+
     const lines = responseData.split("\n");
+    if (lines.length < 6) {
+      res.status(400).json({ error: "The image is not a W-2 form" });
+      return;
+    }
     const Wages = lines[0];
     const FederalIncomeTaxWitheld = lines[1];
     const SocialSecurityWages = lines[2];
