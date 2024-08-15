@@ -38,6 +38,9 @@ const upload = multer({
   storage: storage,
   limits: { fileSize: 5 * 1024 * 1024 },
 });
+app.get("/", (req, res) => {
+  res.json("Hello from the API!");
+});
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 

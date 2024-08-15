@@ -42,7 +42,7 @@ const FileUploadModal = ({ onClose, onUploadFailure }) => {
 
     try {
       const response = await axios.post(
-        `http://localhost:5000/askAboutImages`,
+        `https://image-test-backend.onrender.com/askAboutImages`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
